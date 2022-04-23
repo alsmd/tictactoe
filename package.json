@@ -1,0 +1,15 @@
+{
+    "name": "jogo-velha",
+    "version": "1.0.0",
+    "description": "um jogo da nova geracao com novidades",
+    "main": "/src/main.js",
+    "scripts": {
+        "start": "node ./src/main.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.3"
+    }
+}

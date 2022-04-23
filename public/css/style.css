@@ -1,0 +1,73 @@
+body {
+    height: 100vh;
+    background-color: rgba(41, 54, 98, 1);
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+button {
+    width: 350px;
+    padding: 40px;
+    font-size: 50px;
+    border-radius: 30px;
+    background-color: rgb(17, 88, 120);
+    border: none;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: rgba(17, 88, 120, 0.6);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#loading,
+#game {
+    display: none;
+}
+
+
+/* BOARD */
+
+#board {
+    max-width: 500px;
+    max-height: 400px;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    column-gap: 5px;
+    row-gap: 5px;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.field {
+    background: rgb(63, 63, 63);
+    border-radius: 5px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.field:hover {
+    cursor: pointer;
+}
+
+#victory {
+    padding: 30px;
+    background-color: rgb(59, 219, 59);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+    text-align: center;
+    border-radius: 5px;
+}
