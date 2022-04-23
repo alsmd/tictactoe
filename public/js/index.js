@@ -119,6 +119,7 @@ async function updateBoard() {
         body: JSON.stringify({ id: gameInfo.id, player: gameInfo.player })
     }).then((r) => r.json());
     let tabuleiro = response.tabuleiro;
+    console.log(tabuleiro)
     drawTabuleiro(tabuleiro);
     if (!response.has_connection) {
         let playAgain = document.querySelector("#play-again");

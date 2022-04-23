@@ -1,13 +1,9 @@
 var { partidas, id } = require("../variables")
 
-function new_tabuleiro() {
-    for (let i = 0; i < partidas.length; i++) {
-        if (partidas[i].player1.isLog == false || partidas[i].player2.isLog == false)
-            return partidas[i];
-    }
+function create_tabuleiro() {
     id += 1;
     return tabuleiro = {
-        is_connected: false,
+        has_connection: false,
         player1: {
             isLog: false,
             lastTime: 0
@@ -26,19 +22,37 @@ function new_tabuleiro() {
     }
 }
 
+function new_tabuleiro() {
+    for (let i = 0; i < partidas.length; i++) {
+        if (partidas[i].player1.isLog == false || partidas[i].player2.isLog == false)
+            return partidas[i];
+    }
+    return create_tabuleiro()
+}
+
 function getTabuleiro(id) {
     for (var i = 0; i < partidas.length; i++) {
         if (partidas[i].id == id)
             return partidas[i]
     }
-    return {
-        array: [
-            []
-        ]
+    return 0;
+}
+
+function updatePartidas() {
+    for (let i = 0; i < partidas.length; i++) {
+        if (partidas[i].player1.isLog == false || partidas[i].player2.isLog == false)
+            continue;
+        let secondsToBeDesconected = 5;
+        if ((((Date.now() / 1000) - partidas[i].player1.lastTime > secondsToBeDesconected) && partidas[i].player1.lastTime != 0) || ((Date.now() / 1000) - partidas[i].player2.lastTime > secondsToBeDesconected) && partidas[i].player2.lastTime != 0) {
+            partidas[i].has_connection = false;
+        }
+        if (partidas[i].has_connection == false)
+            partidas.splice(i, 1)
     }
 }
 
 module.exports = {
     getTabuleiro,
-    new_tabuleiro
+    new_tabuleiro,
+    updatePartidas
 }

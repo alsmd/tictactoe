@@ -15,19 +15,21 @@ router.get("/create", function(req, res) {
     if (tabuleiro.player1.isLog == false) {
         tabuleiro.player1.isLog = true;
         tabuleiro.player1.lastTime = 0;
+        tabuleiro.has_connection = true;
         response.player = 1;
     } else {
         tabuleiro.player2.isLog = true;
+        tabuleiro.has_connection = true;
         tabuleiro.player2.lastTime = 0;
         response.player = 2;
     }
     partidas.push(tabuleiro)
-    console.log(response);
     res.send(response);
 })
 
 router.post("/check-game", function(req, res) {
     let gameInfo = req.body.gameInfo
+    let tabuleiro = getTabuleiro(gameInfo.id)
     let response = {
         start: false
     }
@@ -44,11 +46,17 @@ router.post("/check-game", function(req, res) {
 
 router.post("/get-board", function(req, res) {
     let tabuleiro = getTabuleiro(req.body.id)
+    if (tabuleiro == 0)
+        res.send({
+            tabuleiro: [
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]
+            ],
+            win: false,
+            has_connection: false
+        })
     let win = false;
-    let has_connection = true;
-    let secondsToBeDesconected = 5;
-    if ((((Date.now() / 1000) - tabuleiro.player1.lastTime > secondsToBeDesconected) && tabuleiro.player1.lastTime != 0) || ((Date.now() / 1000) - tabuleiro.player2.lastTime > secondsToBeDesconected) && tabuleiro.player2.lastTime != 0)
-        has_connection = false;
     if (req.body.player == 1)
         tabuleiro.player1.lastTime = (Date.now() / 1000);
     else
@@ -58,7 +66,7 @@ router.post("/get-board", function(req, res) {
     res.send({
         tabuleiro: tabuleiro.array,
         win: win,
-        has_connection
+        has_connection: tabuleiro.has_connection
     })
 })
 
