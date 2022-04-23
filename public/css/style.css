@@ -5,6 +5,7 @@ body {
 
 #container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -70,4 +71,17 @@ button:hover {
     display: none;
     text-align: center;
     border-radius: 5px;
+}
+
+#play-again {
+    display: none;
+    width: 130px;
+    border-radius: 50px;
+    height: 60px;
+    padding: 5px;
+    font-size: 25px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
